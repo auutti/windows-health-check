@@ -40,11 +40,3 @@ IT-Techniker prüfen regelmäßig, ob Server und PCs gesund sind: Sind Updates i
 | GitHub Actions | Automatisierung von GitHub: führt Skripte auf Servern in der Cloud aus |
 | Workflow | Datei `.github/workflows/health-check.yml`, legt fest, wann und wie das Skript läuft |
 | try / catch | Fängt Fehler ab: Schlägt eine Prüfung fehl, laufen die anderen trotzdem weiter |
-
-## So lernst du das Projekt (ca. 3–4 Stunden)
-
-1. Den aktuellen Bericht in `reports/` öffnen und jede Zeile verstehen.
-2. Das Skript Abschnitt für Abschnitt lesen. Jeden Befehl, den du nicht kennst, die KI erklären lassen.
-3. Selbst etwas ändern, z. B. die Warngrenze für Speicherplatz von 15 % auf 20 %. Danach im Tab **Actions** → **Windows-Health-Check** → **Run workflow** starten und den neuen Bericht ansehen.
-4. Eine eigene Prüfung ergänzen, z. B. die Uhrzeit-Synchronisation (`w32tm /query /status`).
-5. Den Ablauf in eigenen Worten erklären können: Was prüft das Skript, warum ist das wichtig, wie läuft es automatisch?
