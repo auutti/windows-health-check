@@ -47,7 +47,7 @@ try {
 }
 
 # ---------------------------------------------------------------------------
-# 2. Updates: Wann wurde das letzte Windows-Update installiert?
+# 2. Updates: letztes Windows-Update und ausstehender Neustart
 # ---------------------------------------------------------------------------
 try {
     $letztes = Get-HotFix | Where-Object InstalledOn | Sort-Object InstalledOn -Descending | Select-Object -First 1
@@ -60,6 +60,20 @@ try {
     }
 } catch {
     Add-Result 'Updates' 'Letztes Windows-Update' 'INFO' "Nicht verfuegbar: $($_.Exception.Message)"
+}
+
+try {
+    # Wartet das System auf einen Neustart, um Updates abzuschliessen?
+    $gruende = @()
+    if (Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending') { $gruende += 'Windows-Komponenten' }
+    if (Test-Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired') { $gruende += 'Windows Update' }
+    if ($gruende.Count -gt 0) {
+        Add-Result 'Updates' 'Ausstehender Neustart' 'WARNUNG' "Neustart erforderlich: $($gruende -join ', ')"
+    } else {
+        Add-Result 'Updates' 'Ausstehender Neustart' 'OK' 'Kein Neustart ausstehend'
+    }
+} catch {
+    Add-Result 'Updates' 'Ausstehender Neustart' 'INFO' "Nicht verfuegbar: $($_.Exception.Message)"
 }
 
 # ---------------------------------------------------------------------------
@@ -82,7 +96,27 @@ try {
 }
 
 # ---------------------------------------------------------------------------
-# 4. Sicherheit: Microsoft Defender
+# 4. Backup: letzte erfolgreiche Sicherung (Windows Server-Sicherung)
+# ---------------------------------------------------------------------------
+try {
+    if (Get-Command Get-WBSummary -ErrorAction SilentlyContinue) {
+        $wb = Get-WBSummary
+        if ($wb.LastSuccessfulBackupTime -and $wb.LastSuccessfulBackupTime -gt [datetime]'2000-01-01') {
+            $alter = ((Get-Date) - $wb.LastSuccessfulBackupTime).Days
+            $status = if ($alter -gt 2) { 'KRITISCH' } elseif ($alter -gt 1) { 'WARNUNG' } else { 'OK' }
+            Add-Result 'Backup' 'Letzte Sicherung' $status "Vor $alter Tagen erfolgreich"
+        } else {
+            Add-Result 'Backup' 'Letzte Sicherung' 'KRITISCH' 'Noch keine erfolgreiche Sicherung'
+        }
+    } else {
+        Add-Result 'Backup' 'Letzte Sicherung' 'WARNUNG' 'Windows Server-Sicherung nicht installiert, andere Sicherungsloesung pruefen'
+    }
+} catch {
+    Add-Result 'Backup' 'Letzte Sicherung' 'INFO' "Nicht verfuegbar: $($_.Exception.Message)"
+}
+
+# ---------------------------------------------------------------------------
+# 5. Sicherheit: Microsoft Defender
 # ---------------------------------------------------------------------------
 try {
     $mp = Get-MpComputerStatus
@@ -94,7 +128,7 @@ try {
 }
 
 # ---------------------------------------------------------------------------
-# 5. Sicherheit: Windows-Firewall pro Profil (Domain, Private, Public)
+# 6. Sicherheit: Windows-Firewall pro Profil (Domain, Private, Public)
 # ---------------------------------------------------------------------------
 try {
     foreach ($profil in Get-NetFirewallProfile) {
@@ -107,7 +141,7 @@ try {
 }
 
 # ---------------------------------------------------------------------------
-# 6. Sicherheit: BitLocker-Verschluesselung des Systemlaufwerks
+# 7. Sicherheit: BitLocker-Verschluesselung des Systemlaufwerks
 # ---------------------------------------------------------------------------
 try {
     $bl = Get-BitLockerVolume -MountPoint $env:SystemDrive
@@ -118,7 +152,7 @@ try {
 }
 
 # ---------------------------------------------------------------------------
-# 7. Sicherheit: Mitglieder der lokalen Administratorgruppe
+# 8. Sicherheit: Mitglieder der lokalen Administratorgruppe
 # ---------------------------------------------------------------------------
 try {
     # SID S-1-5-32-544 = Administratoren (funktioniert in jeder Sprache)
@@ -130,7 +164,7 @@ try {
 }
 
 # ---------------------------------------------------------------------------
-# 8. Dienste: automatisch startende Dienste, die nicht laufen
+# 9. Dienste: automatisch startende Dienste, die nicht laufen
 # ---------------------------------------------------------------------------
 try {
     # Diese Dienste beenden sich planmaessig von selbst und werden ignoriert
@@ -147,7 +181,7 @@ try {
 }
 
 # ---------------------------------------------------------------------------
-# 9. Ereignisprotokoll: kritische Fehler und Fehler der letzten 24 Stunden
+# 10. Ereignisprotokoll: kritische Fehler und Fehler der letzten 24 Stunden
 # ---------------------------------------------------------------------------
 try {
     $fehler = @(Get-WinEvent -FilterHashtable @{ LogName = 'System'; Level = 1, 2; StartTime = (Get-Date).AddHours(-24) } -ErrorAction SilentlyContinue)
@@ -206,6 +240,16 @@ $tabelle
 New-Item -ItemType Directory -Path $OutputPath -Force | Out-Null
 $html | Out-File -FilePath (Join-Path $OutputPath 'health-report.html') -Encoding utf8
 $results | ConvertTo-Json | Out-File -FilePath (Join-Path $OutputPath 'health-report.json') -Encoding utf8
+
+# Markdown-Version: wird auf GitHub direkt als Tabelle angezeigt
+$md = @(
+    "# Windows-Health-Check: $env:COMPUTERNAME", '',
+    "Erstellt am $zeit (UTC) | Gesamtstatus: **$gesamt** | OK: $ok | Warnungen: $warn | Kritisch: $krit", '',
+    '| Bereich | Pruefung | Status | Detail |',
+    '|---|---|---|---|'
+)
+$md += $results | ForEach-Object { "| $($_.Bereich) | $($_.Pruefung) | **$($_.Status)** | $($_.Detail.Replace('|', '/')) |" }
+$md -join "`n" | Out-File -FilePath (Join-Path $OutputPath 'health-report.md') -Encoding utf8
 
 $results | Format-Table -AutoSize | Out-String -Width 250 | Write-Host
 Write-Host "Gesamtstatus: $gesamt (OK: $ok, Warnungen: $warn, Kritisch: $krit)"
