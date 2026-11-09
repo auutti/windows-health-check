@@ -37,4 +37,4 @@ Oder auf GitHub: **Actions → Windows-Health-Check → Run workflow**.
 
 ---
 
-Lernprojekt von Jan Schamberger. Mit KI-Unterstützung (Claude Code) erstellt.
+Lernprojekt von Jan Schamberger in Zusammenarbeit mit Claude Code.
