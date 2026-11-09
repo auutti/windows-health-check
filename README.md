@@ -1,2 +1,39 @@
-# windows-health-check
-PowerShell-Skript prueft Windows-Systeme (Updates, Defender, Firewall, Speicher) und erstellt automatisch einen HTML-Bericht via GitHub Actions
+# Windows-Health-Check
+
+PowerShell-Skript, das den Zustand eines Windows-Systems prüft und einen HTML-Bericht erstellt. Es läuft automatisch jede Woche auf einem Windows Server in der Cloud (GitHub Actions).
+
+## Was geprüft wird
+
+- **Updates:** Wann wurde das letzte Windows-Update installiert?
+- **Sicherheit:** Microsoft Defender, Firewall, BitLocker, lokale Administratoren
+- **Speicher:** freier Platz pro Laufwerk, freier Arbeitsspeicher
+- **Betrieb:** Laufzeit seit Neustart, gestoppte Dienste, Systemfehler der letzten 24 Stunden
+
+Jede Prüfung erhält den Status **OK**, **WARNUNG**, **KRITISCH** oder **INFO**.
+
+## Ergebnis
+
+Der aktuelle Bericht liegt in [`reports/`](reports/), eine Vorschau in [`docs/beispiel-bericht.png`](docs/beispiel-bericht.png).
+
+## Aufbau
+
+```
+src/Invoke-HealthCheck.ps1           das Skript
+.github/workflows/health-check.yml   automatischer Lauf (montags + per Klick)
+reports/                             aktueller Bericht (HTML + JSON)
+docs/ERKLAERUNG.md                   Erklärung aller Prüfungen
+```
+
+## Selbst ausführen
+
+Auf einem Windows-PC in PowerShell:
+
+```powershell
+.\src\Invoke-HealthCheck.ps1 -OutputPath .\reports
+```
+
+Oder auf GitHub: **Actions → Windows-Health-Check → Run workflow**.
+
+---
+
+Lernprojekt von Jan Schamberger. Mit KI-Unterstützung (Claude Code) erstellt.
