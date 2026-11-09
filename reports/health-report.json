@@ -1,0 +1,86 @@
+﻿[
+    {
+        "Bereich":  "System",
+        "Pruefung":  "Betriebssystem",
+        "Status":  "INFO",
+        "Detail":  "Microsoft Windows Server 2025 Datacenter (Build 26100)"
+    },
+    {
+        "Bereich":  "System",
+        "Pruefung":  "Laufzeit seit Neustart",
+        "Status":  "OK",
+        "Detail":  "0 Tage"
+    },
+    {
+        "Bereich":  "Updates",
+        "Pruefung":  "Letztes Windows-Update",
+        "Status":  "OK",
+        "Detail":  "KB5126645 vor 16 Tagen installiert"
+    },
+    {
+        "Bereich":  "Speicher",
+        "Pruefung":  "Laufwerk C:",
+        "Status":  "OK",
+        "Detail":  "19.5 % frei (29.3 GB)"
+    },
+    {
+        "Bereich":  "Speicher",
+        "Pruefung":  "Laufwerk D:",
+        "Status":  "OK",
+        "Detail":  "99.9 % frei (109.9 GB)"
+    },
+    {
+        "Bereich":  "Speicher",
+        "Pruefung":  "Arbeitsspeicher",
+        "Status":  "OK",
+        "Detail":  "70.6 % frei von 8 GB"
+    },
+    {
+        "Bereich":  "Sicherheit",
+        "Pruefung":  "Microsoft Defender",
+        "Status":  "KRITISCH",
+        "Detail":  "Echtzeitschutz aus, Signaturen 6 Tage alt"
+    },
+    {
+        "Bereich":  "Sicherheit",
+        "Pruefung":  "Firewall (Domain)",
+        "Status":  "OK",
+        "Detail":  "aktiv"
+    },
+    {
+        "Bereich":  "Sicherheit",
+        "Pruefung":  "Firewall (Private)",
+        "Status":  "OK",
+        "Detail":  "aktiv"
+    },
+    {
+        "Bereich":  "Sicherheit",
+        "Pruefung":  "Firewall (Public)",
+        "Status":  "OK",
+        "Detail":  "aktiv"
+    },
+    {
+        "Bereich":  "Sicherheit",
+        "Pruefung":  "BitLocker (C:)",
+        "Status":  "WARNUNG",
+        "Detail":  "Schutz: Off"
+    },
+    {
+        "Bereich":  "Sicherheit",
+        "Pruefung":  "Lokale Administratoren",
+        "Status":  "INFO",
+        "Detail":  "1: runnervmm7ud1\\runneradmin"
+    },
+    {
+        "Bereich":  "Dienste",
+        "Pruefung":  "Automatische Dienste",
+        "Status":  "OK",
+        "Detail":  "Alle automatischen Dienste laufen"
+    },
+    {
+        "Bereich":  "Ereignisse",
+        "Pruefung":  "Systemfehler (24 h)",
+        "Status":  "OK",
+        "Detail":  "3 Fehler, haeufigste Quelle: volmgr (1x)"
+    }
+]
