@@ -18,22 +18,34 @@
         "Detail":  "KB5126645 vor 16 Tagen installiert"
     },
     {
+        "Bereich":  "Updates",
+        "Pruefung":  "Ausstehender Neustart",
+        "Status":  "OK",
+        "Detail":  "Kein Neustart ausstehend"
+    },
+    {
         "Bereich":  "Speicher",
         "Pruefung":  "Laufwerk C:",
         "Status":  "OK",
-        "Detail":  "19.5 % frei (29.3 GB)"
+        "Detail":  "20.8 % frei (31.2 GB)"
     },
     {
         "Bereich":  "Speicher",
         "Pruefung":  "Laufwerk D:",
         "Status":  "OK",
-        "Detail":  "99.9 % frei (109.9 GB)"
+        "Detail":  "97.4 % frei (73 GB)"
     },
     {
         "Bereich":  "Speicher",
         "Pruefung":  "Arbeitsspeicher",
         "Status":  "OK",
-        "Detail":  "70.6 % frei von 8 GB"
+        "Detail":  "70.4 % frei von 8 GB"
+    },
+    {
+        "Bereich":  "Backup",
+        "Pruefung":  "Letzte Sicherung",
+        "Status":  "WARNUNG",
+        "Detail":  "Windows Server-Sicherung nicht installiert, andere Sicherungsloesung pruefen"
     },
     {
         "Bereich":  "Sicherheit",
