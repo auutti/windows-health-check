@@ -15,7 +15,7 @@
         "Bereich":  "Updates",
         "Pruefung":  "Letztes Windows-Update",
         "Status":  "OK",
-        "Detail":  "KB5126645 vor 16 Tagen installiert"
+        "Detail":  "KB5126645 vor 23 Tagen installiert"
     },
     {
         "Bereich":  "Updates",
@@ -27,19 +27,19 @@
         "Bereich":  "Speicher",
         "Pruefung":  "Laufwerk C:",
         "Status":  "OK",
-        "Detail":  "20.8 % frei (31.2 GB)"
+        "Detail":  "20.7 % frei (31 GB)"
     },
     {
         "Bereich":  "Speicher",
         "Pruefung":  "Laufwerk D:",
         "Status":  "OK",
-        "Detail":  "97.4 % frei (73 GB)"
+        "Detail":  "98 % frei (147 GB)"
     },
     {
         "Bereich":  "Speicher",
         "Pruefung":  "Arbeitsspeicher",
         "Status":  "OK",
-        "Detail":  "70.4 % frei von 8 GB"
+        "Detail":  "84.3 % frei von 16 GB"
     },
     {
         "Bereich":  "Backup",
@@ -51,7 +51,7 @@
         "Bereich":  "Sicherheit",
         "Pruefung":  "Microsoft Defender",
         "Status":  "KRITISCH",
-        "Detail":  "Echtzeitschutz aus, Signaturen 6 Tage alt"
+        "Detail":  "Echtzeitschutz aus, Signaturen 0 Tage alt"
     },
     {
         "Bereich":  "Sicherheit",
@@ -93,6 +93,6 @@
         "Bereich":  "Ereignisse",
         "Pruefung":  "Systemfehler (24 h)",
         "Status":  "OK",
-        "Detail":  "3 Fehler, haeufigste Quelle: volmgr (1x)"
+        "Detail":  "4 Fehler, haeufigste Quelle: Microsoft-Windows-Hyper-V-Netvsc (2x)"
     }
 ]
