@@ -15,7 +15,7 @@
         "Bereich":  "Updates",
         "Pruefung":  "Letztes Windows-Update",
         "Status":  "OK",
-        "Detail":  "KB5126645 vor 23 Tagen installiert"
+        "Detail":  "KB5131079 vor 11 Tagen installiert"
     },
     {
         "Bereich":  "Updates",
@@ -27,7 +27,7 @@
         "Bereich":  "Speicher",
         "Pruefung":  "Laufwerk C:",
         "Status":  "OK",
-        "Detail":  "20.7 % frei (31 GB)"
+        "Detail":  "20 % frei (30 GB)"
     },
     {
         "Bereich":  "Speicher",
@@ -39,7 +39,7 @@
         "Bereich":  "Speicher",
         "Pruefung":  "Arbeitsspeicher",
         "Status":  "OK",
-        "Detail":  "84.3 % frei von 16 GB"
+        "Detail":  "83.7 % frei von 16 GB"
     },
     {
         "Bereich":  "Backup",
@@ -51,7 +51,7 @@
         "Bereich":  "Sicherheit",
         "Pruefung":  "Microsoft Defender",
         "Status":  "KRITISCH",
-        "Detail":  "Echtzeitschutz aus, Signaturen 0 Tage alt"
+        "Detail":  "Echtzeitschutz aus, Signaturen 6 Tage alt"
     },
     {
         "Bereich":  "Sicherheit",
@@ -81,18 +81,18 @@
         "Bereich":  "Sicherheit",
         "Pruefung":  "Lokale Administratoren",
         "Status":  "INFO",
-        "Detail":  "1: runnervmm7ud1\\runneradmin"
+        "Detail":  "1: runnervmbpeip\\runneradmin"
     },
     {
         "Bereich":  "Dienste",
         "Pruefung":  "Automatische Dienste",
-        "Status":  "OK",
-        "Detail":  "Alle automatischen Dienste laufen"
+        "Status":  "WARNUNG",
+        "Detail":  "6 gestoppt: DPS, MSDTC, StorSvc, UALSVC, UsoSvc"
     },
     {
         "Bereich":  "Ereignisse",
         "Pruefung":  "Systemfehler (24 h)",
         "Status":  "OK",
-        "Detail":  "4 Fehler, haeufigste Quelle: Microsoft-Windows-Hyper-V-Netvsc (2x)"
+        "Detail":  "3 Fehler, haeufigste Quelle: Microsoft-Windows-Hyper-V-Netvsc (2x)"
     }
 ]
